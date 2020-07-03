@@ -33,10 +33,10 @@
   <body>
     <script type="module">
 
-      import * as THREE from 'three.module.js';
-      import { ARButton } from 'webxr/ARButton.js';
-      import { MTLLoader } from 'MTLLoader.js';
-      import { OBJLoader } from 'OBJLoader.js';
+      import * as THREE from './three.module.js';
+      import { ARButton } from './ARButton.js';
+      import { MTLLoader } from './MTLLoader.js';
+      import { OBJLoader } from './OBJLoader.js';
 
       var container;
       var camera, scene, renderer;
@@ -102,14 +102,14 @@
       function onSelect() {
 
         new MTLLoader( manager )
-          .setPath( '../static/models/obj/male02/' )
+          .setPath( './' )
           .load( 'male02.mtl', function ( materials ) {
 
             materials.preload();
 
             new OBJLoader( manager )
               .setMaterials( materials )
-              .setPath( '../static/models/obj/male02/' )
+              .setPath( './' )
               .load( 'male02.obj', function ( object ) {
 
                 object.position.y = - 95;
