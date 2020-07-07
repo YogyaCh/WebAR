@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>three.js ar - cones</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.0/css/bulma.min.css">
+    <style>
+      #info{
+  			position: absolute;
+  			top: 0px;
+  			left: 0px;
+  			width: 100%;
+  			padding: 10px;
+  			text-align: center;
+  			color: blue;
+  		}
+    </style>
+	</head>
+  <body>
+		<div id="info">
+				<a href="https://yogyach.github.io/webAR/trepAR.html">Change Model</a>
+				<button id="color">change color</button>
+		</div>
+
+		<script type="module">
+
+      import * as THREE from './three.module.js';
+      import { ARButton } from './ARButton.js';
+
+			var container;
+			var camera, scene, renderer;
+			var controller;
+			var colors=0xeebb99;
+
+			init();
+			animate();
+
+			function init() {
+
+				container = document.createElement( 'div' );
+				document.body.appendChild( container );
+
+				scene = new THREE.Scene();
+
+				camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 1, 2000 );
+
+				var light = new THREE.HemisphereLight( 0xffffff, 0xbbbbff, 1 );
+				light.position.set( 0.5, 1, 0.25 );
+				scene.add( light );
+
+				//
+
+				renderer = new THREE.WebGLRenderer( { antialias: true, alpha: true } );
+				renderer.setPixelRatio( window.devicePixelRatio );
+				renderer.setSize( window.innerWidth, window.innerHeight );
+				renderer.xr.enabled = true;
+				container.appendChild( renderer.domElement );
+
+				//
+
+				document.body.appendChild( ARButton.createButton( renderer ) );
+				//
+				document.getElementById( "color" ).addEventListener( 'click', function () {
+					colors=0xba2f0;
+				}, false );
+				//
+
+        var geometry = new THREE.CylinderBufferGeometry( 0.1, 0.1, 0.2, 32 ).translate( 0, 0.1, 0 );
+
+        function onSelect() {
+
+          var material = new THREE.MeshBasicMaterial({ color :colors, wireframe:false});
+          var cube = new THREE.Mesh( geometry , material );
+          cube.scale.set( 1, 1,1);
+					cube.position.set( 0, 0, - 0.3 ).applyMatrix4( controller.matrixWorld );
+					cube.quaternion.setFromRotationMatrix( controller.matrixWorld );
+					scene.add( cube );
+
+				}
+
+				controller = renderer.xr.getController( 0 );
+				controller.addEventListener( 'select', onSelect );
+				scene.add( controller );
+
+				//
+
+				window.addEventListener( 'resize', onWindowResize, false );
+
+			}
+
+			function onWindowResize() {
+
+				camera.aspect = window.innerWidth / window.innerHeight;
+				camera.updateProjectionMatrix();
+
+				renderer.setSize( window.innerWidth, window.innerHeight );
+
+			}
+
+			//
+
+			function animate() {
+
+				renderer.setAnimationLoop( render );
+
+			}
+
+			function render() {
+
+				renderer.render( scene, camera );
+
+			}
+
+		</script>
+	</body>
+</html>
