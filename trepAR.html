@@ -64,11 +64,7 @@
 				document.body.appendChild( ARButton.createButton( renderer ) );
 
 				//
-				document.getElementById( "color" ).addEventListener( 'click', function () {
-					var x = Math.floor((Math.random() * 5));
-					colour=colors[x];
-					console.log(colour);
-				}, false );
+
 
 				//
 
@@ -93,6 +89,12 @@
 				window.addEventListener( 'resize', onWindowResize, false );
 
 			}
+
+			document.getElementById( "color" ).addEventListener( 'click', function () {
+				var x = Math.floor((Math.random() * 5));
+				colour=colors[x];
+				console.log(colour);
+			}, false );
 
 			function onWindowResize() {
 
