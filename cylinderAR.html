@@ -31,7 +31,8 @@
 			var container;
 			var camera, scene, renderer;
 			var controller;
-			var colors=0xeebb99;
+			var colors=[0xeebb99,0xba2f0,0xec4e32,0x0c5f2c,0xc79ad7];
+			var colour=0xffffff;
 
 			init();
 			animate();
@@ -49,7 +50,6 @@
 				light.position.set( 0.5, 1, 0.25 );
 				scene.add( light );
 
-				//
 
 				renderer = new THREE.WebGLRenderer( { antialias: true, alpha: true } );
 				renderer.setPixelRatio( window.devicePixelRatio );
@@ -57,6 +57,12 @@
 				renderer.xr.enabled = true;
 				container.appendChild( renderer.domElement );
 
+				//
+				document.getElementById( "color" ).addEventListener( 'click', function () {
+					var x = Math.floor((Math.random() * 5));
+					colour=colors[x];
+					console.log(colour);
+				}, false );
 				//
 
 				document.body.appendChild( ARButton.createButton( renderer ) );
