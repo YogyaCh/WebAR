@@ -3,10 +3,18 @@
   <head>
     <meta charset="utf-8">
     <title>model</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.0/css/bulma.min.css">
     <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
     <script nomodule src="https://unpkg.com/@google/model-viewer/dist/model-viewer-legacy.js"></script>
   </head>
   <body>
-    <model-viewer ar camera-controls ios-src="assets/38.usdz" src="assets/38.glb" alt="A 3D model of a human">
+    <div class=columns>
+      <div class="column">
+        <span>click on the icon to start web AR</span>
+      </div>
+      <div class="column">
+        <model-viewer ar camera-controls ios-src="assets/38.usdz" src="assets/38.glb" alt="A 3D model of a human">
+      </div>
+    </div>
   </body>
 </html>
