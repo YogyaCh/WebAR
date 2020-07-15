@@ -25,18 +25,17 @@
     </script>
   </head>
   <body>
-    <div class="columns">
+    <div class="columns is-mobile">
       <div class="column">
-          <img src="assets/wood.jpg" width="160" height="160" onclick="change_texture('assets/wood.jpg')">
+          <img src="assets/wood.jpg" width="120" height="120" onclick="change_texture('assets/wood.jpg')">
           <br>
-          <img src="assets/brick_wall.jpg" width="160" height="160" onclick="change_texture('assets/brick_wall.jpg')">
+          <img src="assets/brick_wall.jpg" width="120" height="120" onclick="change_texture('assets/brick_wall.jpg')">
           <br>
-          <img src="assets/metal_texture.jpg" width="160" height="160" onclick="change_texture('assets/metal_texture.jpg')">
+          <img src="assets/metal_texture.jpg" width="120" height="120" onclick="change_texture('assets/metal_texture.jpg')">
           <br>
       </div>
       <div class="column">
         <a-scene embedded>
-          <a-camera position="0 1.2 0"></a-camera>
           <a-entity id="box" geometry="primitive: box" material="color: #4CC3D9; " position="-1 0.5 -3" rotation="0 45 0"></a-entity>
         </a-scene>
       </div>
