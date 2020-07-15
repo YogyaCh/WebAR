@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+      <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.0/css/bulma.min.css">
+      <script src="https://unpkg.com/aframe-extras@3.3.0/dist/aframe-extras.min.js"></script>
+      <script src="https://unpkg.com/aframe-environment-component@1.1.0/dist/aframe-environment-component.min.js"></script>
+    <title>cube</title>
+    <script>
+      AFRAME.registerComponent('hide-in-ar-mode', {
+        // Set this object invisible while in AR mode.
+        init: function () {
+          this.el.sceneEl.addEventListener('enter-vr', (ev) => {
+            this.wasVisible = this.el.getAttribute('visible');
+            if (this.el.sceneEl.is('ar-mode')) {
+              this.el.setAttribute('visible', false);
+            }
+          });
+          this.el.sceneEl.addEventListener('exit-vr', (ev) => {
+            if (this.wasVisible) this.el.setAttribute('visible', true);
+          });
+        }
+      });
+    </script>
+  </head>
+  <body>
+    <div class="columns">
+      <div class="column">
+          <img src="assets/wood.jpg" width="160" height="160" onclick="change_texture('assets/wood.jpg')">
+          <br>
+          <img src="assets/brick_wall.jpg" width="160" height="160" onclick="change_texture('assets/brick_wall.jpg')">
+          <br>
+          <img src="assets/metal_texture.jpg" width="160" height="160" onclick="change_texture('assets/metal_texture.jpg')">
+          <br>
+      </div>
+      <div class="column">
+        <a-scene embedded>
+          <a-camera position="0 1.2 0"></a-camera>
+          <a-entity id="box" geometry="primitive: box" material="color: #4CC3D9; " position="-1 0.5 -3" rotation="0 45 0"></a-entity>
+        </a-scene>
+      </div>
+    </div>
+    <script>
+      function change_texture(texture){
+        var entity = document.querySelector('a-entity');
+        console.log(texture);
+        entity.setAttribute('material', { src: texture });
+      }
+    </script>
+  </body>
+</html>
